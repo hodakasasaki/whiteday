@@ -92,11 +92,16 @@
         .memory-section:nth-child(odd) .polaroid { transform: rotate(-2deg); }
         .memory-section:nth-child(even) .polaroid { transform: rotate(2deg); }
 
+        /* ポラロイドの中の画像の設定 */
         .polaroid img {
             width: 100%;
-            height: auto;
+            /* --- ここから追加・修正 --- */
+            height: 300px; /* ★画像の縦の長さを300pxに固定（お好みで調整してください） */
+            object-fit: cover; /* ★超重要！指定したサイズに合わせて、画像を綺麗にトリミングする */
+            /* ------------------------ */
             display: block;
             filter: sepia(10%); /* ほんのりレトロに */
+            border-radius: 2px; /* 画像の角も少し丸く */
         }
 
         /* --- 吹き出し（付箋＋マステ風） --- */
