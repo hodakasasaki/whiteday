@@ -3,77 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Day Special</title>
+    <title>White Day 2026</title>
     <style>
+        :root {
+            --main-pink: #ffafbd;
+            --sub-pink: #ffc3a0;
+            --text-color: #5d5d5d;
+        }
         body {
             margin: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #fdf5f7; /* 優しいピンク白 */
-            color: #4a4a4a;
-            text-align: center;
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #fff5f7 0%, #fef9e7 100%);
             overflow-x: hidden;
         }
-        .section {
-            height: 100vh;
+        /* 背景に動きをつける（エンジニア演出） */
+        .bg-circles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+        .circle {
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: var(--main-pink);
+            animation: move 10s infinite alternate;
+        }
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        header {
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
         }
-        h1 { font-size: 2.5rem; color: #ff85a2; }
-        p { font-size: 1.1rem; line-height: 1.6; }
-        .photo {
-            width: 80%;
-            max-width: 300px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin: 20px 0;
+        header h1 {
+            font-size: 2.5rem;
+            color: #ff6b81;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
         }
-        /* ふわっと表示させるアニメーション */
-        .fade-in {
+
+        /* 写真カードのデザイン */
+        .memory-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 80px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease-out;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
         }
-        .fade-in.visible {
+        .memory-card.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        .memory-card img {
+            width: 100%;
+            border-radius: 15px;
+            display: block;
+        }
+        .memory-card p {
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1.8;
+            padding: 0 10px;
+        }
+
+        footer {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .final-msg {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b81;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(255,107,129,0.2);
         }
     </style>
 </head>
 <body>
 
-    <div class="section">
-        <h1>Happy White Day!</h1>
-        <p>今日は一緒に来てくれてありがとう。</p>
-        <p>↓↓↓</p>
+    <div class="bg-circles">
+        <div class="circle" style="top: 10%; left: 10%;"></div>
+        <div class="circle" style="bottom: 10%; right: 10%; background: #ffc3a0;"></div>
     </div>
 
-    <div class="section fade-in">
-        <h2>Special Thanks</h2>
-        <div class="photo">📸</div> 
-        <p>手作りチョコ、すごく嬉しかった！<br>あの日のお返しを込めてサイトを作りました。</p>
-    </div>
+    <div class="container">
+        <header>
+            <h1>Happy White Day</h1>
+            <p>バレンタインのお礼に<br>二人の思い出をまとめました</p>
+            <p style="margin-top: 50px; font-size: 0.8rem; color: #aaa;">Scroll Down</p>
+        </header>
 
-    <div class="section fade-in">
-        <h2>Look at me...</h2>
-        <p>画面を閉じて、隣を見てみて？</p>
-        <p>そこに本物のプレゼントがあります。</p>
+        <div class="memory-card js-scroll">
+            <img src="photo1.jpg" alt="思い出1">
+            <p>ここに一言メッセージ。例えば「初めて一緒に行ったあの場所、楽しかったね！」など。</p>
+        </div>
+
+        <div class="memory-card js-scroll">
+            <img src="photo2.jpg" alt="思い出2">
+            <p>ここに一言メッセージ。例えば「手作りチョコ、本当に美味しかったよ。ありがとう！」など。</p>
+        </div>
+
+        <footer>
+            <div class="final-msg js-scroll">
+                いつもありがとう。<br>
+                これからもよろしくね！
+            </div>
+        </footer>
     </div>
 
     <script>
-        // スクロールに合わせて表示させるJS
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.2 });
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
