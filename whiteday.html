@@ -116,35 +116,53 @@
             border-radius: 2px;
         }
 
-        /* 吹き出し（付箋）もこの枠に合わせて少し調整 */
+        /* 吹き出し（付箋風）のブラッシュアップ */
         .speech-bubble {
-            bottom: -20px;
-            right: 15px;
-            /* 付箋も少し透けさせるとお洒落 */
-            background: rgba(255, 249, 196, 0.95);
-            transform: rotate(1deg);
-        }
-
-        /* マスキングテープの演出 */
-        .speech-bubble::before {
-            content: '';
             position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-2deg);
-            width: 70px;
-            height: 25px;
-            background: var(--tape-color);
-            border-left: 2px dotted rgba(0,0,0,0.1);
-            border-right: 2px dotted rgba(0,0,0,0.1);
+            bottom: -35px; /* 位置を微調整 */
+            right: 15px;
+            width: 85%; /* 横幅に少しゆとりを */
+            
+            /* --- ゆとりを持たせる設定 --- */
+            padding: 20px 25px; /* 上下20px、左右25pxの余白でゆったりさせる */
+            
+            /* --- 付箋らしい色と質感 --- */
+            background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%); /* ほんのりグラデーション */
+            border-radius: 2px; /* カッチリさせすぎない程度の角丸 */
+            
+            /* --- 浮かせる演出（立体的な影） --- */
+            box-shadow: 
+                5px 5px 15px rgba(0, 0, 0, 0.1),    /* 全体の浮き上がり */
+                1px 1px 2px rgba(255, 255, 255, 0.8) inset; /* 内側の光で厚みを出す */
+            
+            /* 少し傾けて「適当に貼った感」を出す */
+            transform: rotate(1.5deg);
+            z-index: 10;
         }
 
+        /* 付箋内のテキスト設定 */
         .speech-bubble p {
             margin: 0;
             font-size: 0.95rem;
-            line-height: 1.6;
-            color: #555;
+            line-height: 1.8; /* 行間を広げて読みやすく */
+            color: #444;
             font-weight: 500;
+            text-align: left; /* 左寄せで手書き風に */
+        }
+
+        /* マスキングテープ（ここも少し透けさせてリアルに） */
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 40%;
+            width: 70px;
+            height: 28px;
+            background: rgba(255, 182, 193, 0.4); /* 透明度を上げて下のポラロイドが透けるように */
+            border-left: 1px dashed rgba(0,0,0,0.1);
+            border-right: 1px dashed rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         /* --- フッターメッセージ --- */
