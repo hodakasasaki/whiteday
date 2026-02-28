@@ -3,174 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Day 2026</title>
+    <title>White Day Special Memories</title>
     <style>
+        /* --- 全体の設定 --- */
         :root {
-            --main-pink: #ffafbd;
-            --sub-pink: #ffc3a0;
-            --text-color: #5d5d5d;
+            --glass: rgba(255, 255, 255, 0.8);
+            --accent-pink: #ff8fa3;
+            --tape-color: rgba(255, 182, 193, 0.6);
+            --fusen-yellow: #fff9c4;
         }
+
         body {
             margin: 0;
-            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", sans-serif;
-            color: var(--text-color);
-            background: linear-gradient(135deg, #fff5f7 0%, #fef9e7 100%);
+            padding: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+            color: #444;
+            /* 背景：動くグラデーション演出 */
+            background: linear-gradient(-45deg, #fff5f7, #fef9e7, #ffe4e1, #fffafa);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             overflow-x: hidden;
         }
-        /* 背景に動きをつける（エンジニア演出） */
-        .bg-circles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.5;
-        }
-        .circle {
-            position: absolute;
-            width: 300px; height: 300px;
-            border-radius: 50%;
-            background: var(--main-pink);
-            animation: move 10s infinite alternate;
-        }
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 100px); }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
 
+        /* --- ヘッダー演出 --- */
         header {
-            height: 80vh;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            color: #ff6b81;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
-        /* 写真カードのデザイン */
-        .memory-card {
-            background: white;
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 80px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-pink);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .scroll-down {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #bbb;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* --- 思い出カード（ポラロイド風） --- */
+        .memory-section {
+            margin-bottom: 100px;
             opacity: 0;
             transform: translateY(50px);
-            transition: all 0.8s ease-out;
+            transition: all 1.0s ease-out;
         }
-        .memory-card.visible {
+
+        .memory-section.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .memory-card img {
-            width: 100%;
-            border-radius: 15px;
-            display: block;
-        }
-        .memory-card p {
-            margin-top: 20px;
-            font-size: 1rem;
-            line-height: 1.8;
-            padding: 0 10px;
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 60px 15px; /* 下を広くしてポラロイド風に */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 2px;
+            position: relative;
         }
 
+        /* カードを交互に少し傾ける */
+        .memory-section:nth-child(odd) .polaroid { transform: rotate(-2deg); }
+        .memory-section:nth-child(even) .polaroid { transform: rotate(2deg); }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: sepia(10%); /* ほんのりレトロに */
+        }
+
+        /* --- 吹き出し（付箋＋マステ風） --- */
+        .speech-bubble {
+            position: absolute;
+            bottom: -30px; /* 写真の下に被せる */
+            right: 10px;
+            background: var(--fusen-yellow);
+            padding: 12px 20px;
+            width: 80%;
+            border-radius: 5px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* マスキングテープの演出 */
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 70px;
+            height: 25px;
+            background: var(--tape-color);
+            border-left: 2px dotted rgba(0,0,0,0.1);
+            border-right: 2px dotted rgba(0,0,0,0.1);
+        }
+
+        .speech-bubble p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* --- フッターメッセージ --- */
         footer {
-            height: 100vh;
+            height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
         }
-        .final-msg {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff6b81;
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 0 20px rgba(255,107,129,0.2);
-        }
-        /* 吹き出しのデザイン */
-        .speech-bubble {
-            position: relative;
-            background: #fff0f3; /* 薄いピンク色 */
-            border-radius: 15px;
-            padding: 15px 20px;
-            margin-top: 20px;
-            color: #ff6b81; /* 文字色もピンクに */
-            font-size: 1rem;
-            line-height: 1.6;
-            filter: drop-shadow(0 4px 10px rgba(255,107,129,0.1));
+
+        .final-card {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(255,143,163,0.2);
         }
 
-        /* 吹き出しの三角部分 */
-        .speech-bubble:after {
-            content: '';
-            position: absolute;
-            top: -15px; /* 上側に三角を出す */
-            left: 30px; /* 三角の位置（左から30px） */
-            border-style: solid;
-            border-width: 0 15px 15px; /* 三角の形 */
-            border-color: transparent transparent #fff0f3; /* 三角の色を吹き出しと同じに */
-            display: block;
-            width: 0;
-            z-index: 1;
+        .final-card h2 {
+            color: var(--accent-pink);
+            margin-bottom: 15px;
         }
+
     </style>
 </head>
 <body>
-
-    <div class="bg-circles">
-        <div class="circle" style="top: 10%; left: 10%;"></div>
-        <div class="circle" style="bottom: 10%; right: 10%; background: #ffc3a0;"></div>
-    </div>
 
     <div class="container">
         <header>
             <h1>Happy White Day</h1>
             <p>バレンタインのお礼に<br>二人の思い出をまとめました</p>
-            <p style="margin-top: 50px; font-size: 0.8rem; color: #aaa;">Scroll Down</p>
+            <div class="scroll-down">Scroll Down ↓</div>
         </header>
 
-        <div class="memory-card js-scroll">
-            <img src="photo1.jpg" alt="思い出1">
-            <div class="speech-bubble">
-                ここに一言メッセージ。例えば「初めて一緒に行ったあの場所、楽しかったね！」など。
+        <div class="memory-section js-scroll">
+            <div class="polaroid">
+                <img src="photo1.jpg" alt="思い出の写真1">
+                <div class="speech-bubble">
+                    <p>ここに一言メッセージを入れてね！初めてデートした時の写真とか。</p>
+                </div>
             </div>
         </div>
 
-        <div class="memory-card js-scroll">
-            <img src="photo2.jpg" alt="思い出2">
-            <div class="speech-bubble">
-                ここに一言メッセージ。例えば「手作りチョコ、本当に美味しかったよ。ありがとう！」など。
+        <div class="memory-section js-scroll">
+            <div class="polaroid">
+                <img src="photo2.jpg" alt="思い出の写真2">
+                <div class="speech-bubble">
+                    <p>手作りチョコ、本当に美味しかったよ！ありがとう。</p>
+                </div>
             </div>
         </div>
 
         <footer>
-            <div class="final-msg js-scroll">
-                いつもありがとう。<br>
-                これからもよろしくね！
+            <div class="final-card js-scroll">
+                <h2>Thank You!</h2>
+                <p>いつも隣にいてくれてありがとう。<br>これからもたくさん思い出作ろうね。</p>
             </div>
         </footer>
     </div>
 
     <script>
+        /* スクロールに合わせて表示させるエンジニア御用達のJS */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.3 });
 
         document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
     </script>
