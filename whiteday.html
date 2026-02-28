@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
     <title>White Day Special Memories</title>
     <style>
         /* --- 全体の設定 --- */
@@ -147,11 +148,15 @@
         /* 付箋内のテキスト設定 */
         .speech-bubble p {
             margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.8; /* 行間を広げて読みやすく */
+            /* ここでフォントを指定 */
+            font-family: 'Kiwi Maru', serif; 
+            font-size: 1rem;
+            line-height: 1.8;
             color: #444;
             font-weight: 500;
-            text-align: left; /* 左寄せで手書き風に */
+            text-align: left;
+            /* 少し文字の間を広げて読みやすく */
+            letter-spacing: 0.05em; 
         }
 
         /* マスキングテープ（ここも少し透けさせてリアルに） */
