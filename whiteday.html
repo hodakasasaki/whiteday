@@ -99,6 +99,32 @@
             border-radius: 30px;
             box-shadow: 0 0 20px rgba(255,107,129,0.2);
         }
+        /* 吹き出しのデザイン */
+        .speech-bubble {
+            position: relative;
+            background: #fff0f3; /* 薄いピンク色 */
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            color: #ff6b81; /* 文字色もピンクに */
+            font-size: 1rem;
+            line-height: 1.6;
+            filter: drop-shadow(0 4px 10px rgba(255,107,129,0.1));
+        }
+
+        /* 吹き出しの三角部分 */
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            top: -15px; /* 上側に三角を出す */
+            left: 30px; /* 三角の位置（左から30px） */
+            border-style: solid;
+            border-width: 0 15px 15px; /* 三角の形 */
+            border-color: transparent transparent #fff0f3; /* 三角の色を吹き出しと同じに */
+            display: block;
+            width: 0;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -117,12 +143,16 @@
 
         <div class="memory-card js-scroll">
             <img src="photo1.jpg" alt="思い出1">
-            <p>ここに一言メッセージ。例えば「初めて一緒に行ったあの場所、楽しかったね！」など。</p>
+            <div class="speech-bubble">
+                ここに一言メッセージ。例えば「初めて一緒に行ったあの場所、楽しかったね！」など。
+            </div>
         </div>
 
         <div class="memory-card js-scroll">
             <img src="photo2.jpg" alt="思い出2">
-            <p>ここに一言メッセージ。例えば「手作りチョコ、本当に美味しかったよ。ありがとう！」など。</p>
+            <div class="speech-bubble">
+                ここに一言メッセージ。例えば「手作りチョコ、本当に美味しかったよ。ありがとう！」など。
+            </div>
         </div>
 
         <footer>
