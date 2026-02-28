@@ -118,6 +118,18 @@
             align-items: center;
         }
 
+        .polaroid img {
+            width: 100%;
+            max-width: 400px; /* ★大きくなりすぎないように制限をかける */
+            height: 300px; 
+            object-fit: contain; 
+            background-color: #ffffff;
+            display: block;
+            margin: 0 auto; /* ★画像が真ん中に来るようにする */
+            filter: sepia(10%);
+            border-radius: 2px;
+        }
+
         /* 吹き出し（付箋風）のブラッシュアップ */
         .speech-bubble {
             /* position: absolute; を削除し、自然に並べる */
